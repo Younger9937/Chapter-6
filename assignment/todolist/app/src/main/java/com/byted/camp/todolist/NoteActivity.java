@@ -81,6 +81,7 @@ public class NoteActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        todoDbHelper.close();
         super.onDestroy();
     }
 
