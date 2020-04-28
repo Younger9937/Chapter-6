@@ -13,6 +13,7 @@ public class Note {
     private Date date;
     private State state;
     private String content;
+    private int level;
 
     public Note(long id) {
         this.id = id;
@@ -41,4 +42,8 @@ public class Note {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public int getLevel(){ return level; }
+
+    public void setLevel(int level){ this.level = level; }
 }

@@ -2,6 +2,8 @@ package com.byted.camp.todolist;
 
 import com.byted.camp.todolist.beans.Note;
 
+import java.text.ParseException;
+
 /**
  * Created on 2019/1/23.
  *
@@ -9,7 +11,7 @@ import com.byted.camp.todolist.beans.Note;
  */
 public interface NoteOperator {
 
-    void deleteNote(Note note);
+    void deleteNote(Note note) throws ParseException;
 
-    void updateNote(Note note);
+    void updateNote(Note note) throws ParseException;
 }

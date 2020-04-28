@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -14,6 +15,7 @@ import com.byted.camp.todolist.R;
 import com.byted.camp.todolist.beans.Note;
 import com.byted.camp.todolist.beans.State;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
@@ -23,6 +25,8 @@ import java.util.Locale;
  * @author xuyingyi@bytedance.com (Yingyi Xu)
  */
 public class NoteViewHolder extends RecyclerView.ViewHolder {
+
+    private static final String TAG = "NoteViewHolder";
 
     private static final SimpleDateFormat SIMPLE_DATE_FORMAT =
             new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss", Locale.ENGLISH);
@@ -45,6 +49,7 @@ public class NoteViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(final Note note) {
+        Log.d(TAG, String.valueOf(note.id));
         contentText.setText(note.getContent());
         dateText.setText(SIMPLE_DATE_FORMAT.format(note.getDate()));
 
@@ -54,13 +59,21 @@ public class NoteViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 note.setState(isChecked ? State.DONE : State.TODO);
-                operator.updateNote(note);
+                try {
+                    operator.updateNote(note);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                operator.deleteNote(note);
+                try {
+                    operator.deleteNote(note);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
